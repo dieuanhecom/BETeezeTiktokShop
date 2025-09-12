@@ -1,0 +1,73 @@
+{
+    "order_in_excel": 1,
+    "title": "US Women's World Cup Supporter Sweatshirt, American Women World Cup Soccer, USA World Cup",
+    "status": "error",
+    "detail": {
+        "message": "Error when download and convert images to base64",
+        "data": [
+            {
+                "column": "image1",
+                "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L1+%401+81239",
+                "response": {
+                    "status": "error",
+                    "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L1+%401+81239",
+                    "data": null
+                }
+            },
+            {
+                "column": "image2",
+                "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L2+%401+39751",
+                "response": {
+                    "status": "error",
+                    "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L2+%401+39751",
+                    "data": null
+                }
+            },
+            {
+                "column": "image3",
+                "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L3+%401+61649",
+                "response": {
+                    "status": "error",
+                    "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L3+%401+61649",
+                    "data": null
+                }
+            },
+            {
+                "column": "image4",
+                "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L4+%401+38445",
+                "response": {
+                    "status": "error",
+                    "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L4+%401+38445",
+                    "data": null
+                }
+            },
+            {
+                "column": "image5",
+                "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L5+%401+45309",
+                "response": {
+                    "status": "error",
+                    "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L5+%401+45309",
+                    "data": null
+                }
+            },
+            {
+                "column": "image6",
+                "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L6+%401+74812",
+                "response": {
+                    "status": "error",
+                    "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L6+%401+74812",
+                    "data": null
+                }
+            },
+            {
+                "column": "image7",
+                "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L7+%401+31204",
+                "response": {
+                    "status": "error",
+                    "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L7+%401+31204",
+                    "data": null
+                }
+            }
+        ]
+    }
+}

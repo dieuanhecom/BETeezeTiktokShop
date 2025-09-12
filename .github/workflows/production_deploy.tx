@@ -1,0 +1,39 @@
+name: Develop Backend CI/CD
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    checkout-code:
+        runs-on: self-hosted
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+    docker-deploy:
+        runs-on: self-hosted
+        needs: checkout-code
+        steps:
+            - name: Kill the running container with name tiktokshop-folinas-be-production
+              run: |
+                  docker stop tiktokshop-folinas-be-production || true
+                  docker rm tiktokshop-folinas-be-production || true
+                  docker rmi tiktokshop-folinas-be-production || true
+            
+            - name: Copy the .env file
+              run: |
+                  cp ~/workspace/secrets/folinas_tiktokshop_production/.env .env
+
+            - name: Build the Docker image
+              run: |
+                  docker build -t tiktokshop-folinas-be-production .
+
+            - name: stop running container running on port 8080
+              run: |
+                  docker stop $(docker ps | grep ':8080->' | awk '{ print $1 }') || true
+
+            - name: Run Docker container
+              run: |
+                  docker run --name tiktokshop-folinas-be-production -p 8080:8000 -d --restart unless-stopped tiktokshop-folinas-be-production

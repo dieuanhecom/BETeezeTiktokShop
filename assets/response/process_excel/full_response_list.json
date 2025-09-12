@@ -1,0 +1,142 @@
+[
+    {
+        "order_in_excel": 1,
+        "title": "US Women's World Cup Supporter Sweatshirt, American Women World Cup Soccer, USA World Cup",
+        "status": "error",
+        "detail": {
+            "message": "Error when download and convert images to base64",
+            "data": [
+                {
+                    "column": "image1",
+                    "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L1+%401+81239",
+                    "response": {
+                        "status": "error",
+                        "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L1+%401+81239",
+                        "data": null
+                    }
+                },
+                {
+                    "column": "image2",
+                    "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L2+%401+39751",
+                    "response": {
+                        "status": "error",
+                        "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L2+%401+39751",
+                        "data": null
+                    }
+                },
+                {
+                    "column": "image3",
+                    "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L3+%401+61649",
+                    "response": {
+                        "status": "error",
+                        "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L3+%401+61649",
+                        "data": null
+                    }
+                },
+                {
+                    "column": "image4",
+                    "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L4+%401+38445",
+                    "response": {
+                        "status": "error",
+                        "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L4+%401+38445",
+                        "data": null
+                    }
+                },
+                {
+                    "column": "image5",
+                    "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L5+%401+45309",
+                    "response": {
+                        "status": "error",
+                        "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L5+%401+45309",
+                        "data": null
+                    }
+                },
+                {
+                    "column": "image6",
+                    "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L6+%401+74812",
+                    "response": {
+                        "status": "error",
+                        "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L6+%401+74812",
+                        "data": null
+                    }
+                },
+                {
+                    "column": "image7",
+                    "image_url": "https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L7+%401+31204",
+                    "response": {
+                        "status": "error",
+                        "message": "User AnonymousUser | Failed to download image (403): https://teamkhacanh.s3.amazonaws.com/American+Women+World+Cup+Soccer+L7+%401+31204",
+                        "data": null
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "order_in_excel": 2,
+        "title": "Chattanooga Lookouts Nooga T Shirt",
+        "status": "success",
+        "detail": null
+    },
+    {
+        "order_in_excel": 3,
+        "title": "Chattanooga Lookouts Looie  Shirt",
+        "status": "success",
+        "detail": null
+    },
+    {
+        "order_in_excel": 4,
+        "title": "Lana Del Rey 90's Retro Vintage Unisex T-Shirt",
+        "status": "error",
+        "detail": {
+            "message": "Error when upload images to TikTok",
+            "data": [
+                {
+                    "column": "image1",
+                    "image_url": "https://beeteeshop.com/wp-content/uploads/2022/07/lana-del-rey-90s-retro-vintage-unisex-tshirtmouzx.jpg",
+                    "response": {
+                        "status": "error",
+                        "message": "argument of type 'NoneType' is not iterable",
+                        "data": null
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "order_in_excel": 5,
+        "title": "Try That In A Small Town Shirt Jason Aldean Try That In A Small Town T Shirt",
+        "status": "success",
+        "detail": null
+    },
+    {
+        "order_in_excel": 6,
+        "title": "Jason Aldean Try That In A Small Town Shirt Jason Aldean Shirt The Aldean Team Shirt",
+        "status": "success",
+        "detail": null
+    },
+    {
+        "order_in_excel": 7,
+        "title": "Jason Aldean Try That In A Small Town Shirt, Jason Aldean Shirt, American Flag Quote, Country Music Shirt, Country Shirt",
+        "status": "success",
+        "detail": null
+    },
+    {
+        "order_in_excel": 8,
+        "title": "Try That In A Small Town Shirt, Country Music Shirt, Jason Aldean Distressed American Flag Shirt, Country Lovers Shirt, Country Music",
+        "status": "success",
+        "detail": null
+    },
+    {
+        "order_in_excel": 9,
+        "title": "Vintage Try That In A Small Town Comfort Colors Shirt, Jason Aldean shirt, Cricut, Country Music shirt, Western Vintage Shirt, Cowboy Tee.",
+        "status": "success",
+        "detail": null
+    },
+    {
+        "order_in_excel": 10,
+        "title": "Try That In A Small Town I Stand With Adlean Comfort Colors Shirt, American Flag Quote, Jason Aldean Shirt, Country Music",
+        "status": "success",
+        "detail": null
+    }
+]
