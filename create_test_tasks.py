@@ -6,6 +6,7 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tiktok.settings')
 django.setup()
 
+
 from api.models import CombineLabelTask
 from django.contrib.auth.models import User
 
