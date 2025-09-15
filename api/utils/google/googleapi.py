@@ -5,7 +5,6 @@ import pickle
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
-
 from tiktok.settings import PUB_ENVIRONMENT
 
 # OAuth2 credentials file path
@@ -166,25 +165,34 @@ class GoogleDriveService:
         self.service = None
         self._initialize_service()
 
-    def _initialize_service(self, use_console_flow=False):
+    def _initialize_service(self, use_console_flow=False, force_reauth=False):
         """Initialize or refresh the Google Drive service"""
         try:
+            # If force_reauth is True, remove existing token
+            if force_reauth and os.path.exists(TOKEN_FILE):
+                print("🔄 Forcing re-authentication...")
+                os.remove(TOKEN_FILE)
+                
             self.creds = authenticate(use_console_flow=use_console_flow)
             self.service = build("drive", "v3", credentials=self.creds)
+            print("✅ Google Drive service initialized successfully")
         except Exception as e:
-            print(f"Failed to initialize Google Drive service: {e}")
+            print(f"❌ Failed to initialize Google Drive service: {e}")
             raise
 
     def _refresh_service_if_needed(self):
         """Refresh service if credentials are expired"""
         if self.creds and self.creds.expired and self.creds.refresh_token:
             try:
+                print("🔄 Refreshing expired credentials...")
                 self.creds.refresh(Request())
                 self.service = build("drive", "v3", credentials=self.creds)
+                print("✅ Credentials refreshed successfully")
             except Exception as e:
-                print(f"Failed to refresh credentials: {e}")
+                print(f"❌ Failed to refresh credentials: {e}")
                 # Re-initialize service if refresh fails
-                self._initialize_service()
+                print("🔄 Attempting to re-initialize service...")
+                self._initialize_service(force_reauth=True)
 
     def upload_pdf_to_drive(self, pdf_buffer, filename, max_retries=3):
         """
@@ -214,6 +222,7 @@ class GoogleDriveService:
                 # Calculate backoff time: 1s, 2s, 4s
                 if attempt > 0:
                     backoff_time = 2 ** (attempt - 1)
+                    print(f"🔄 Retrying upload, attempt {attempt + 1}/{max_retries} after {backoff_time}s")
                     logger.info(f"Retrying upload, attempt {attempt + 1}/{max_retries} after {backoff_time}s")
                     time.sleep(backoff_time)
 
@@ -235,12 +244,16 @@ class GoogleDriveService:
                     resumable=True
                 )
 
+                print(f"📤 Uploading {filename} to Google Drive...")
+
                 # Upload file
                 file = self.service.files().create(
                     body=file_metadata,
                     media_body=media,
                     fields='id,webViewLink,webContentLink'
                 ).execute()
+
+                print("✅ File uploaded successfully, setting permissions...")
 
                 # Set file permissions to "anyone with link can view"
                 permission = {
@@ -257,6 +270,7 @@ class GoogleDriveService:
                 file_link = file.get('webViewLink')
                 download_link = file.get('webContentLink')
 
+                print(f"✅ Successfully uploaded {filename} to Google Drive")
                 logger.info(f"Successfully uploaded {filename} to Google Drive")
 
                 return {
@@ -269,29 +283,36 @@ class GoogleDriveService:
             except HttpError as e:
                 # Handle specific Google API errors
                 if e.resp.status == 401:  # Unauthorized
+                    print("🔐 Unauthorized access, attempting to re-authenticate")
                     logger.warning("Unauthorized access, attempting to re-authenticate")
                     try:
-                        self._initialize_service()
+                        self._initialize_service(force_reauth=True)
                         continue  # Retry with new credentials
                     except Exception as auth_error:
                         error_msg = f"Re-authentication failed: {str(auth_error)}"
+                        print(f"❌ {error_msg}")
                         logger.error(error_msg)
 
                 error_msg = f"Google API error (attempt {attempt + 1}/{max_retries}): {str(e)}"
+                print(f"❌ {error_msg}")
                 logger.error(error_msg)
 
             except Exception as e:
                 error_msg = f"Upload error (attempt {attempt + 1}/{max_retries}): {str(e)}"
+                print(f"❌ {error_msg}")
                 logger.error(error_msg)
 
-                # If it's a credential issue, try to re-initialize
-                if "credentials" in str(e).lower() or "auth" in str(e).lower():
+                # If it's a credential/authentication issue, try to re-initialize
+                if any(keyword in str(e).lower() for keyword in ['credentials', 'auth', 'invalid_grant', 'jwt']):
+                    print("🔐 Authentication issue detected, attempting to re-authenticate...")
                     try:
-                        # Try console flow if local server fails
-                        self._initialize_service(use_console_flow=True)
+                        # Force re-authentication on credential issues
+                        self._initialize_service(use_console_flow=is_server_environment(), force_reauth=True)
                         continue  # Retry with new service
                     except Exception as init_error:
-                        logger.error(f"Service re-initialization failed: {str(init_error)}")
+                        error_msg = f"Service re-initialization failed: {str(init_error)}"
+                        print(f"❌ {error_msg}")
+                        logger.error(error_msg)
 
                 if attempt == max_retries - 1:
                     return {
@@ -351,12 +372,14 @@ class GoogleDriveService:
         try:
             if os.path.exists(TOKEN_FILE):
                 os.remove(TOKEN_FILE)
+                print("🗑️  Removed existing token file")
 
             # Re-initialize service with console flow fallback
             try:
                 self._initialize_service()
             except Exception:
                 # If local server fails, try console flow
+                print("🔄 Local server authentication failed, trying console flow...")
                 self._initialize_service(use_console_flow=True)
 
             return {
@@ -448,3 +471,20 @@ def check_oauth_setup():
         'credentials_file': CREDENTIALS_FILE,
         'token_file': TOKEN_FILE
     }
+
+
+# Utility function to clear authentication and force re-auth
+def clear_authentication():
+    """
+    Clear stored authentication tokens to force re-authentication
+    """
+    try:
+        if os.path.exists(TOKEN_FILE):
+            os.remove(TOKEN_FILE)
+            print(f"✅ Removed token file: {TOKEN_FILE}")
+            return True
+    except Exception as e:
+        print(f"❌ Error removing token file: {e}")
+        return False
+    
+    return False
