@@ -19,13 +19,13 @@ CREDENTIALS_FILE = (
 TOKEN_FILE = (
     "api/utils/google/token_dev.pickle"
     if PUB_ENVIRONMENT == "dev"
-    else "api/utils/google/token_prod.pickle"
+    else "api/utils/google/token_dev.pickle"
 )
 
 PARENT_FOLDER_ID = (
-    "1DPWPANYS9PTx8OEHiywYTJyWC3OlBGK4"
+    "1-u7gFfv9OVg6yyO0Riyh5waH2V6MRaAP"
     if PUB_ENVIRONMENT == "dev"
-    else "1DPWPANYS9PTx8OEHiywYTJyWC3OlBGK4"
+    else "1-u7gFfv9OVg6yyO0Riyh5waH2V6MRaAP"
 )
 
 # Phạm vi quyền truy cập API cho Google Drive
